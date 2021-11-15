@@ -21,8 +21,16 @@ stages:
           outputPath: '$(Build.ArtifactStagingDirectory)'
       - publish: $(Build.ArtifactStagingDirectory)
         artifact: drop
+
+  - stage: Build
+    displayName: Build Tests
+    dependsOn: Build
+    condition: succeeded()
+    pool:
+      vmImage: 'windows-latest'
+    jobs: 
     - job: BuildTestProject
-      steps:    
+      steps:
       - task: UiPathPack@2
         inputs:
           versionType: 'AutoVersion'
