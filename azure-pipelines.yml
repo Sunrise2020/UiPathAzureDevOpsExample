@@ -22,7 +22,7 @@ stages:
       - publish: $(Build.ArtifactStagingDirectory)
         artifact: drop
 
-  - stage: Build
+  - stage: BuildTests
     displayName: Build Tests
     dependsOn: Build
     condition: succeeded()
