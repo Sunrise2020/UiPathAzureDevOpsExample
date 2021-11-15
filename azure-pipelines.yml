@@ -70,7 +70,7 @@ stages:
                 folderName: 'Shared'
             - task: UiPathDeploy@2
               inputs:
-                orchestratorConnection: 'UIPath Testcases'
+                orchestratorConnection: 'UIPath Orchestrator'
                 packagesPath: '$(Pipeline.Workspace)\tests\'
                 folderName: 'Shared'
                 
