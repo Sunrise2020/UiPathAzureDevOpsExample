@@ -68,6 +68,11 @@ stages:
                 orchestratorConnection: 'UIPath Orchestrator'
                 packagesPath: '$(Pipeline.Workspace)\drop\'
                 folderName: 'Shared'
+            - task: UiPathDeploy@2
+              inputs:
+                orchestratorConnection: 'UIPath Testcases'
+                packagesPath: '$(Pipeline.Workspace)\tests\'
+                folderName: 'Shared'
                 
   - stage: WorkflowAnalyser
     displayName: RunWorkflow Analyser
@@ -107,5 +112,5 @@ stages:
               orchestratorConnection: 'UIPath Orchestrator'
               testSet: 'UiPathAzureDevOps_Tests'
               folderName: 'Shared'
-              testReportDestination: '$(Pipeline.Workspace)\drop\'
+              testReportDestination: '$(Pipeline.Workspace)\tests\'
 
