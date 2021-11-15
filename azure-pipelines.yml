@@ -121,7 +121,6 @@ stages:
     pool:
       vmImage: 'windows-latest'
     jobs:
-
       - job: TestExec
         steps:
           - task: UiPathTest@2
