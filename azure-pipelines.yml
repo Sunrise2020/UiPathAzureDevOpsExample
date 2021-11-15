@@ -72,7 +72,7 @@ stages:
               inputs:
                 orchestratorConnection: 'UIPath Orchestrator'
                 packagesPath: '$(Pipeline.Workspace)\tests\'
-                folderName: 'Shared'
+                folderName: 'Shared/TestCases'
                 
   - stage: WorkflowAnalyser
     displayName: RunWorkflow Analyser
