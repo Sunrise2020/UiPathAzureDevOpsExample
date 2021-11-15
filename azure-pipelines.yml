@@ -114,3 +114,23 @@ stages:
               folderName: 'Shared'
               testReportDestination: '$(Pipeline.Workspace)\tests\'
 
+  - stage: TestExec
+    displayName:  Test After Publish
+    dependsOn: DeployDEV
+    condition: succeeded()
+    pool:
+      vmImage: 'windows-latest'
+    jobs:
+
+      - job: TestExec
+        steps:
+          - task: UiPathTest@2
+            inputs:
+              testTarget: 'TestProject'
+              orchestratorConnection: 'UIPath Orchestrator'
+              folderName: 'Shared/TestCases'
+              testReportDestination: '$(Pipeline.Workspace)\tests\'
+              traceLevel: 'Information'
+
+
+
