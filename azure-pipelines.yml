@@ -10,7 +10,6 @@ stages:
       vmImage: 'windows-latest'
     jobs: 
     - job: BuildPackage
-      # pool: Azure Pipelines
       steps:    
       - task: UiPathPack@2
         inputs:
@@ -22,13 +21,6 @@ stages:
       - publish: $(Build.ArtifactStagingDirectory)
         artifact: drop
 
-  - stage: BuildTests
-    displayName: Build Tests
-    dependsOn: Build
-    condition: succeeded()
-    pool:
-      vmImage: 'windows-latest'
-    jobs: 
     - job: BuildTestProject
       steps:
       - task: UiPathPack@2
@@ -39,7 +31,7 @@ stages:
           orchestratorConnection: 'UIPath Orchestrator'
           outputPath: '$(Build.ArtifactStagingDirectory)'
       - publish: $(Build.ArtifactStagingDirectory)
-        artifact: test
+        artifact: tests
 
   - stage: Assest
     displayName: Create Assests
