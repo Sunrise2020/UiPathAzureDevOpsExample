@@ -6,6 +6,8 @@ variables:
 stages:
   - stage: Build
     displayName: Build Package
+    pool:
+      vmImage: 'windows-latest'
     jobs: 
     - job: BuildPackage
       pool: Azure Pipelines
