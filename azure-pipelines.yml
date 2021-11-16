@@ -92,22 +92,21 @@ stages:
               workingDirectory: $(Build.SourcesDirectory)
             displayName: 'Analyse Project'
 
-  - stage: TestDEV
-    displayName:  Test After Publish
-    dependsOn: DeployDEV
-    condition: succeeded()
-    pool: $(AGENTS)
-    jobs:
-      - job: TestDEV
-        # pool: Azure Pipelines
-        steps:
-          - task: UiPathTest@2
-            inputs:
-              testTarget: 'TestSet'
-              orchestratorConnection: 'UIPath Orchestrator'
-              testSet: 'UiPathAzureDevOps_Tests'
-              folderName: 'Shared'
-              testReportDestination: '$(Pipeline.Workspace)\tests\'
+#  - stage: TestDEV
+#    displayName:  Test After Publish
+#    dependsOn: DeployDEV
+#    condition: succeeded()
+#    pool: $(AGENTS)
+#    jobs:
+#      - job: TestDEV
+#        steps:
+#          - task: UiPathTest@2
+#            inputs:
+#              testTarget: 'TestSet'
+#              orchestratorConnection: 'UIPath Orchestrator'
+#              testSet: 'UiPathAzureDevOps_Tests'
+#              folderName: 'Shared'
+#              testReportDestination: '$(Pipeline.Workspace)\tests\'
 
   - stage: TestExec
     displayName:  Test Case Execution
