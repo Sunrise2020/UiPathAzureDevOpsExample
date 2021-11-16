@@ -13,7 +13,7 @@ stages:
       - task: DeleteFiles@1
         inputs:
           SourceFolder: '$(Build.ArtifactStagingDirectory)'
-          Contents: 'drop'
+          Contents: '**/drop/*'
       - task: UiPathPack@2
         inputs:
           versionType: 'AutoVersion'
@@ -28,7 +28,7 @@ stages:
       - task: DeleteFiles@1
         inputs:
           SourceFolder: '$(Build.ArtifactStagingDirectory)'
-          Contents: 'tests'
+          Contents: '**/tests/*'
       - task: UiPathPack@2
         inputs:
           versionType: 'AutoVersion'
