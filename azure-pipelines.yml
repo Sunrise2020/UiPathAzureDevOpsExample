@@ -41,7 +41,6 @@ stages:
     pool: $(AGENTS)
     jobs:
       - job: CreateAssests
-        # pool: Azure Pipelines
         steps:
         - task: UiPathAssets@2
           inputs:
@@ -107,5 +106,4 @@ stages:
               testReportDestination: '$(Pipeline.Workspace)\tests\'
               traceLevel: 'Information'
               timeout: 180
-              
 
