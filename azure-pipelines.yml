@@ -110,7 +110,7 @@ stages:
               testReportDestination: '$(Pipeline.Workspace)\tests\'
 
   - stage: TestExec
-    displayName:  Test After Publish
+    displayName:  Test Case Execution
     dependsOn: DeployDEV
     condition: succeeded()
     pool: $(AGENTS)
