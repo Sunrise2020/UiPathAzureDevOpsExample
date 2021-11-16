@@ -6,8 +6,7 @@ variables:
 stages:
   - stage: Build
     displayName: Build Package
-    pool:
-      vmImage: 'windows-latest'
+    pool: $(AGENTS)
     jobs: 
     - job: BuildPackage
       steps:    
@@ -35,8 +34,7 @@ stages:
 
   - stage: Assest
     displayName: Create Assests
-    pool:
-      vmImage: 'windows-latest'
+    pool: $(AGENTS)
     jobs:
       - job: CreateAssests
         # pool: Azure Pipelines
@@ -49,8 +47,7 @@ stages:
             csvFile: '$(Build.SourcesDirectory)\Data\Assests.csv'
 
   - stage: DeployDEV
-    pool:
-      vmImage: 'windows-latest'
+    pool: $(AGENTS)
     displayName: Deploy build artifact to DEV
     dependsOn: Build
     condition: succeeded()
@@ -78,8 +75,7 @@ stages:
     displayName: RunWorkflow Analyser
     dependsOn: Build
     condition: succeeded()
-    pool:
-      vmImage: 'windows-latest'
+    pool: $(AGENTS)
     jobs:
         - job: WorkflowAnalyser
           displayName: AnalyseProject Using Workflow Cli
@@ -100,8 +96,7 @@ stages:
     displayName:  Test After Publish
     dependsOn: DeployDEV
     condition: succeeded()
-    pool:
-      vmImage: 'windows-latest'
+    pool: $(AGENTS)
     jobs:
       - job: TestDEV
         # pool: Azure Pipelines
@@ -118,8 +113,7 @@ stages:
     displayName:  Test After Publish
     dependsOn: DeployDEV
     condition: succeeded()
-    pool:
-      vmImage: 'windows-latest'
+    pool: $(AGENTS)
     jobs:
       - job: TestExec
         steps:
@@ -130,6 +124,4 @@ stages:
               folderName: 'Shared/TestCases'
               testReportDestination: '$(Pipeline.Workspace)\tests\'
               traceLevel: 'Information'
-
-
 
