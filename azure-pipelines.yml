@@ -9,6 +9,8 @@ stages:
     pool: $(AGENTS)
     jobs: 
     - job: BuildPackage
+      workspace:
+        clean: all
       steps:    
       - task: UiPathPack@2
         inputs:
@@ -21,6 +23,8 @@ stages:
         artifact: drop
 
     - job: BuildTestProject
+      workspace:
+        clean: all
       steps:
       - task: UiPathPack@2
         inputs:
