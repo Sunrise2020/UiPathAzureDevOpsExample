@@ -75,27 +75,6 @@ stages:
                 packagesPath: '$(Pipeline.Workspace)\tests\'
                 folderName: 'Shared/TestCases'
                 
-  - stage: WorkflowAnalyser
-    displayName: RunWorkflow Analyser
-    dependsOn: Build
-    condition: succeeded()
-    pool: $(AGENTS)
-    jobs:
-        - job: WorkflowAnalyser
-          displayName: AnalyseProject Using Workflow Cli
-          # pool: Azure Pipelines
-          steps:
-          - task: PowerShell@2
-            inputs:
-              targetType: filePath
-              filePath: $(Build.SourcesDirectory)\Data\Workflow-Analyzer-CLI-Script
-              arguments: > # Use this to avoid newline characters in multiline string
-                -ProjectFilePath $(Build.SourcesDirectory)\project.json
-                -ExecutableFilePath "C:\Users\prasa\AppData\Local\UiPath\app-21.4.4\UiPath.Studio.CommandLine.exe"
-                -OutputFilePath '$(Pipeline.Workspace)\drop\Workflow-Analysis.json'
-              workingDirectory: $(Build.SourcesDirectory)
-            displayName: 'Analyse Project'
-
 #  - stage: TestDEV
 #    displayName:  Test After Publish
 #    dependsOn: DeployDEV
