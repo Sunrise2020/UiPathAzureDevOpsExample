@@ -9,9 +9,11 @@ stages:
     pool: $(AGENTS)
     jobs: 
     - job: BuildPackage
-      workspace:
-        clean: all
-      steps:    
+      steps:
+      - task: DeleteFiles@1
+        inputs:
+          SourceFolder: '$(Build.ArtifactStagingDirectory)'
+          Contents: 'drop'
       - task: UiPathPack@2
         inputs:
           versionType: 'AutoVersion'
@@ -21,11 +23,12 @@ stages:
           outputPath: '$(Build.ArtifactStagingDirectory)'
       - publish: $(Build.ArtifactStagingDirectory)
         artifact: drop
-
     - job: BuildTestProject
-      workspace:
-        clean: all
       steps:
+      - task: DeleteFiles@1
+        inputs:
+          SourceFolder: '$(Build.ArtifactStagingDirectory)'
+          Contents: 'tests'
       - task: UiPathPack@2
         inputs:
           versionType: 'AutoVersion'
