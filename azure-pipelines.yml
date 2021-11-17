@@ -30,6 +30,11 @@ stages:
         artifact: drop
     - job: BuildTestProject
       steps:
+      - task: PowerShell@2
+        inputs:
+          targetType: 'inline'
+          script: |
+            write-Host "Artifact staging directory is: $(Build.ArtifactStagingDirectory)"
       - task: DeleteFiles@1
         inputs:
           SourceFolder: '$(Build.ArtifactStagingDirectory)'
