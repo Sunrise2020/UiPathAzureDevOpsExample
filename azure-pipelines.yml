@@ -17,6 +17,7 @@ stages:
           script: |
             write-Host "Deleting the content in: $(Agent.BuildDirectory)\drop"
             Remove-Item –path $(Agent.BuildDirectory)\drop –recurse
+          errorActionPreference: 'continue'
       - task: UiPathPack@2
         inputs:
           versionType: 'AutoVersion'
@@ -30,11 +31,13 @@ stages:
       steps:
       - task: PowerShell@2
         displayName: Deleting old packages
+        condition: if (Test-Path $(Agent.BuildDirectory)\drop)
         inputs:
           targetType: 'inline'
           script: |
             write-Host "Deleting the content in: $(Agent.BuildDirectory)\tests"
             Remove-Item –path $(Agent.BuildDirectory)\tests –recurse
+          errorActionPreference: 'continue'
       - task: UiPathPack@2
         inputs:
           versionType: 'AutoVersion'
