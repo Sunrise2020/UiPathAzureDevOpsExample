@@ -11,19 +11,12 @@ stages:
     - job: BuildPackage
       steps:
       - task: PowerShell@2
+        displayName: Deleting old packages
         inputs:
           targetType: 'inline'
           script: |
-            write-Host "Artifact staging directory is: $(Build.ArtifactStagingDirectory)"
-            write-Host "Agent work folder: $(Agent.WorkFolder)"
-            write-Host "Agent build directory: $(Agent.BuildDirectory)"
-            write-Host "Agent work space: $(Pipeline.Workspace)"
+            write-Host "Deleting the content in: $(Agent.BuildDirectory)\drop"
             Remove-Item –path $(Agent.BuildDirectory)\drop –recurse
-            Remove-Item –path $(Agent.BuildDirectory)\tests –recurse
-      - task: DeleteFiles@1
-        inputs:
-          SourceFolder: '$(Agent.WorkFolder)'
-          Contents: '**/*nupkg/*'
       - task: UiPathPack@2
         inputs:
           versionType: 'AutoVersion'
@@ -36,14 +29,12 @@ stages:
     - job: BuildTestProject
       steps:
       - task: PowerShell@2
+        displayName: Deleting old packages
         inputs:
           targetType: 'inline'
           script: |
-            write-Host "Artifact staging directory is: $(Build.ArtifactStagingDirectory)"
-      - task: DeleteFiles@1
-        inputs:
-          SourceFolder: '$(Agent.WorkFolder)'
-          Contents: '**/*nupkg/*'
+            write-Host "Deleting the content in: $(Agent.BuildDirectory)\tests"
+            Remove-Item –path $(Agent.BuildDirectory)\tests –recurse
       - task: UiPathPack@2
         inputs:
           versionType: 'AutoVersion'
