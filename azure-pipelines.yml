@@ -2,11 +2,11 @@ trigger:
   - master
 variables:
   - group: DEV
+pool: $(AGENTS)
 
 stages:
   - stage: Build
     displayName: Build UIPath Packages
-    pool: $(AGENTS)
     jobs: 
     - job: BuildTestPackage
       steps:
@@ -32,7 +32,6 @@ stages:
 
   - stage: Assest
     displayName: Create Assests
-    pool: $(AGENTS)
     jobs:
       - job: CreateAssests
         steps:
@@ -44,7 +43,6 @@ stages:
             csvFile: '$(Build.SourcesDirectory)\Data\Assests.csv'
 
   - stage: DeployDEV
-    pool: $(AGENTS)
     displayName: Deploy build artifacts
     dependsOn: Build
     condition: succeeded()
@@ -67,7 +65,6 @@ stages:
     displayName:  Test Case Execution
     dependsOn: DeployDEV
     condition: succeeded()
-    pool: $(AGENTS)
     jobs:
       - job: TestExec
         steps:
@@ -79,4 +76,3 @@ stages:
               testReportDestination: '$(Pipeline.Workspace)\tests\'
               traceLevel: 'Information'
               timeout: 180
-
