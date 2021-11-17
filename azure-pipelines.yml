@@ -18,8 +18,8 @@ stages:
             write-Host "Agent work folder: $(Agent.WorkFolder)"
             write-Host "Agent build directory: $(Agent.BuildDirectory)"
             write-Host "Agent work space: $(Pipeline.Workspace)"
-            Remove-Item –path $(Agent.WorkFolder)+"/drop" –recurse
-            Remove-Item –path $(Agent.WorkFolder)+"/tests" –recurse
+            Remove-Item –path $(Agent.BuildDirectory)/drop" –recurse
+            Remove-Item –path $(Agent.BuildDirectory)/tests" –recurse
       - task: DeleteFiles@1
         inputs:
           SourceFolder: '$(Agent.WorkFolder)'
