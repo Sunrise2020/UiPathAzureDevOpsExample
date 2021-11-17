@@ -31,7 +31,6 @@ stages:
       steps:
       - task: PowerShell@2
         displayName: Deleting old packages
-        condition: if (Test-Path $(Agent.BuildDirectory)\drop)
         inputs:
           targetType: 'inline'
           script: |
