@@ -14,9 +14,7 @@ stages:
         inputs:
           targetType: 'inline'
           script: |
-            # Write your PowerShell commands here.
             write-Host "Artifact staging directory is: $(Build.ArtifactStagingDirectory)"
-            exit 1
       - task: DeleteFiles@1
         inputs:
           SourceFolder: '$(Build.ArtifactStagingDirectory)'
