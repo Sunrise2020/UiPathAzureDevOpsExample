@@ -78,3 +78,9 @@ stages:
               testReportDestination: '$(Pipeline.Workspace)\tests\'
               traceLevel: 'Information'
               timeout: 180
+          - task: PublishTestResults@2
+            inputs:
+              testResultsFormat: 'JUnit'
+              testResultsFiles: '**/TEST-*.xml'
+              searchFolder: '$(Pipeline.Workspace)\tests\'
+              testRunTitle: 'UIPath Testrun'
