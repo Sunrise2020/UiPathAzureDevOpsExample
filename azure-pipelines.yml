@@ -17,10 +17,11 @@ stages:
             write-Host "Artifact staging directory is: $(Build.ArtifactStagingDirectory)"
             write-Host "Agent work folder: $(Agent.WorkFolder)"
             write-Host "Agent build directory: $(Agent.BuildDirectory)"
+            write-Host "Agent work space: $(Pipeline.Workspace)"
       - task: DeleteFiles@1
         inputs:
-          SourceFolder: '$(Build.ArtifactStagingDirectory)'
-          Contents: '**/drop/*'
+          SourceFolder: '$(Agent.WorkFolder)'
+          Contents: 'drop'
       - task: UiPathPack@2
         inputs:
           versionType: 'AutoVersion'
@@ -39,8 +40,8 @@ stages:
             write-Host "Artifact staging directory is: $(Build.ArtifactStagingDirectory)"
       - task: DeleteFiles@1
         inputs:
-          SourceFolder: '$(Build.ArtifactStagingDirectory)'
-          Contents: '**/tests/*'
+          SourceFolder: '$(Agent.WorkFolder)'
+          Contents: 'tests'
       - task: UiPathPack@2
         inputs:
           versionType: 'AutoVersion'
