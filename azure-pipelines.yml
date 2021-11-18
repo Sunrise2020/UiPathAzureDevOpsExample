@@ -1,3 +1,4 @@
+name: UIPath Build and Execution
 trigger:
   - master
 variables:
@@ -78,9 +79,9 @@ stages:
               testReportDestination: '$(Pipeline.Workspace)\tests\'
               traceLevel: 'Information'
               timeout: 180
-          - task: PublishTestResults@2
-            inputs:
-              testResultsFormat: 'JUnit'
-              testResultsFiles: '**/*.xml'
-              searchFolder: '$(Pipeline.Workspace)\tests\'
-              testRunTitle: 'UIPath Testrun'
+          # - task: PublishTestResults@2
+          #   inputs:
+          #     testResultsFormat: 'JUnit'
+          #     testResultsFiles: '**/*.xml'
+          #     searchFolder: '$(Pipeline.Workspace)\tests\'
+          #     testRunTitle: 'UIPath Testrun'
