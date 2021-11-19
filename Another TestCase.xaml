@@ -83,7 +83,7 @@
           <OutArgument x:TypeArguments="x:Int32">[f]</OutArgument>
         </Assign.To>
         <Assign.Value>
-          <InArgument x:TypeArguments="x:Int32">10</InArgument>
+          <InArgument x:TypeArguments="x:Int32">11</InArgument>
         </Assign.Value>
       </Assign>
       <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_2">
